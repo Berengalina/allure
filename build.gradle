@@ -13,18 +13,16 @@ compileTestJava.options.encoding = "UTF-8"
 
 allure {
     autoconfigure = true
-    version = '2.13.8' // Latest Allure Version
+    version = '2.13.8'
     useJUnit5 {
-        version = '2.13.8' // Latest Allure Version
+        version = '2.13.8'
     }
 }
 repositories {
     jcenter()
     mavenCentral()
 }
-//repositories {
-//    mavenCentral()
-//}
+
 
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.7.1'

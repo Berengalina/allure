@@ -1,5 +1,9 @@
 package ru.netology.web.test;
 
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Keys;
 import ru.netology.web.data.DataHelper;
@@ -11,6 +15,11 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.*;
 
 public class RegistrationTest {
+
+    @BeforeAll
+    static void setUpAll() {
+        SelenideLogger.addListener("allure", new AllureSelenide());
+    }
 
     @Test
     void shouldRegisterCardDelivery() {
@@ -74,6 +83,11 @@ public class RegistrationTest {
         $("[data-test-id=replan-notification] .notification__content").shouldBe(visible, Duration.ofSeconds(5)).shouldHave(text("У вас уже запланирована встреча на другую дату"));
         $(byText("Перепланировать")).click();
         $("[data-test-id=success-notification] .notification__content").shouldBe(visible, Duration.ofSeconds(5)).shouldHave(text("" + DataHelper.generateSecondDateOfMeeting()));
+    }
+
+    @AfterAll
+    static void tearDownAll() {
+        SelenideLogger.removeListener("allure");
     }
 
 
